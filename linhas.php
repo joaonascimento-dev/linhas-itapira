@@ -22,7 +22,7 @@ $lista = $linha->listar();
                 <div class="row position-relative py-2 <?php echo $index % 2 == 0 ? '' : 'bg-body-secondary'; ?>">
                     <div class="col"><span><?php echo $linha['nome'] ?></span></div>
                     <div class="col-2 text-end">
-                        <a class="btn btn-outline-dark stretched-link" href="turmas-editar.php?id=<?= $linha['id'] ?>"><i class="bi bi-chevron-right"></i></a>
+                        <a class="btn btn-outline-dark stretched-link" href="linhasMapa2.php?id=<?= $linha['id'] ?>"><i class="bi bi-chevron-right"></i></a>
                     </div>
             </div>
             <?php endforeach ?>

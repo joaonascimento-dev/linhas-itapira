@@ -10,8 +10,6 @@
                 <li><a href="#" class="nav-link px-2 <?php echo $ativo == 'horarios' ? "text-primary" : "text-dark" ?> fs-5"><i class="bi bi-clock"></i> Horários</a></li>
                 <li><a href="linhas.php" class="nav-link px-2 <?php echo $ativo == 'linhas' ? "text-primary" : "text-dark" ?> fs-5"><i class="bi bi-sign-turn-right"></i> Linhas</a>
                 </li>
-                <li><a href="#" class="nav-link px-2 <?php echo $ativo == 'consultar' ? "text-primary" : "text-dark" ?> fs-5"><i class="bi bi-credit-card"></i> Consultar
-                        Cartão</a></li>
             </ul>
 
             <div class="text-end">
