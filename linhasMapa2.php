@@ -1,3 +1,11 @@
+<?php
+$linhaId = $_GET['id'];
+
+require_once "model/Parada.php";
+$parada = new Parada();
+$listParada = $parada->listar($linhaId);
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -34,7 +42,7 @@
             // Specify the coordinates of the location you want to display
             /*var latitude = -22.4294292;
             var longitude = -46.8230301;*/
-            var locations = [
+            /* var locations = [
                 {
                     name: 'Busão',
                     latitude: -22.4386529,
@@ -54,6 +62,11 @@
                     latitude: -22.4366529,
                     longitude: -46.822313
                 }
+            ]; */
+            var locations = [
+                <?php foreach ($listParada as $parada)
+                    echo "{name: '" . $parada['nome'] . "', latitude: '" . $parada['latitude'] . "', longitude: '" . $parada['longitude'] . "'},"
+                ?>
             ];
 
             // Create a new map object
@@ -71,7 +84,7 @@
 
             // Set the map's center and zoom level based on the first location
             var firstLocation = locations[0];
-            map.setView(new L.LatLng(firstLocation.latitude, firstLocation.longitude), 17);
+            map.setView(new L.LatLng(firstLocation.latitude, firstLocation.longitude), 16);
             map.addLayer(osmLayer);
             //map.removeLayer(map.markerLayer);
 
