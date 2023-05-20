@@ -33,9 +33,7 @@ class Parada
         $conexao->exec($sql);
 
         echo "Registro gravado com sucesso";
-        
     }
-
 
 public function listar($linhaId = false)
 {
@@ -58,7 +56,6 @@ public function listar($linhaId = false)
 
     // Retorna o array contendo todos os registros da tabela "parada"
     return $lista;
-
 }
 
 public function excluir()
@@ -74,7 +71,6 @@ public function excluir()
     // Executa a instrução SQL de exclusão utilizando o método
     // "exec" do objeto de conexão PDO criado acima
     $conexao->exec($sql);
-
 }
 
 public function carregar()
