@@ -14,7 +14,7 @@ $documents = $collection->find();
 // Generate HTML code
 $html = '<ul>';
 foreach ($documents as $document) {
-    $html .= '<li>' . $document['_id'] . '</li>'; // Replace 'field_name' with the actual field you want to display
+    $html .= '<li>' . $document['latitude'] . ' ' . $document['longitude'] . '</li>'; // Replace 'field_name' with the actual field you want to display
 }
 $html .= '</ul>';
 
