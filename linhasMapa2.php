@@ -1,5 +1,24 @@
 <?php
+require_once 'C:\\xampp\\php\\vendor\\autoload.php';
+$mongoClient = new MongoDB\Client("mongodb://localhost:27017");
+$collection = $mongoClient->linhasItapira->onibusLocalizacao;
+
 $linhaId = $_GET['id'];
+
+echo intval($linhaId);
+
+$whereCondition = [
+    'linhaId' => intval($linhaId)
+];
+
+
+$sortCondition = [
+    '_id' => -1    // Sort by '_id' field in ascending order (1 for ascending, -1 for descending)
+];
+
+$options = [
+    'sort' => $sortCondition
+];
 
 require_once "model/Parada.php";
 $parada = new Parada();
@@ -17,6 +36,7 @@ $listParada = $parada->listar($linhaId);
             /*height: 400px;*/
             width: 100%;
         }
+
         .map-title {
             position: absolute;
             top: 10px;
@@ -31,14 +51,14 @@ $listParada = $parada->listar($linhaId);
     </style>
 </head>
 
-<body>
+<body id="corpo">
     <?php $ativo = "linhas";
     include("fragment/navbar.php"); ?>
 
     <div id="map"></div>
 
     <script>
-        function initMap() {
+        async function initMap() {
             // Specify the coordinates of the location you want to display
             /*var latitude = -22.4294292;
             var longitude = -46.8230301;*/
@@ -63,7 +83,11 @@ $listParada = $parada->listar($linhaId);
                     longitude: -46.822313
                 }
             ]; */
-            var locations = [
+            var locations = [{
+                    name: 'Busão',
+                    latitude: -22.4386529,
+                    longitude: -46.822313
+                },
                 <?php foreach ($listParada as $parada)
                     echo "{name: '" . $parada['nome'] . "', latitude: '" . $parada['latitude'] . "', longitude: '" . $parada['longitude'] . "'},"
                 ?>
@@ -88,7 +112,9 @@ $listParada = $parada->listar($linhaId);
             map.addLayer(osmLayer);
             //map.removeLayer(map.markerLayer);
 
-            var mapTitle = L.control({position: 'topright'});
+            var mapTitle = L.control({
+                position: 'topright'
+            });
             mapTitle.onAdd = function(map) {
                 var div = L.DomUtil.create('div', 'map-title');
                 div.innerHTML - 'Rodoviaria - Cubatao';
@@ -109,7 +135,31 @@ $listParada = $parada->listar($linhaId);
                     });
 
                     marker.setIcon(myIcon);
+
+                    const element = document.getElementById("corpo");
+                    element.onload(updateBusao());
+
+                    console.log("Antes funcao");
+
+                    async function updateBusao() {
+                        var i = 0;
+                        do {
+                            <?php
+                            $documentos = $collection->find($whereCondition, $options);
+                            $document = $documentos->toArray()[0]; ?>
+                            console.log("<?php echo $document['latitude'] . ' - ' . $document['longitude'] ?>");
+                            
+                            //var latlng = e.latlng;
+                            var latlng = L.latLng(<?php echo $document['latitude'] . ' , ' . $document['longitude'] ?>);
+
+                            marker.setLatLng(latlng);
+                            i += 0.00005;
+                            await new Promise(r => setTimeout(r, 1000));
+                        } while (true);
+                    }
                 }
+
+                console.log(marker);
 
                 markers.push(marker);
             });

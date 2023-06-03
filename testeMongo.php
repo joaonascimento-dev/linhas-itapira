@@ -10,7 +10,6 @@ $collection = $mongoClient->linhasItapira->onibusLocalizacao;
 
 // Query MongoDB collection
 $documents = $collection->find();
-
 // Generate HTML code
 $html = '<ul>';
 foreach ($documents as $document) {
