@@ -57,6 +57,7 @@ $listParada = $parada->listar($linhaId);
 
     <div id="map"></div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         async function initMap() {
             // Specify the coordinates of the location you want to display
@@ -142,18 +143,28 @@ $listParada = $parada->listar($linhaId);
                     console.log("Antes funcao");
 
                     async function updateBusao() {
-                        var i = 0;
+                        //var i = 0;
                         do {
-                            <?php
-                            $documentos = $collection->find($whereCondition, $options);
-                            $document = $documentos->toArray()[0]; ?>
-                            console.log("<?php echo $document['latitude'] . ' - ' . $document['longitude'] ?>");
-                            
+                            $.ajax({
+                                url: 'consultaMongo.php?id=1',
+                                type: 'GET',
+                                success: function(response) {
+                                    // Manipule a resposta do PHP aqui
+                                    console.log(response);
+                                    const resposta = response.split(",");
+                                    console.log(resposta);
+                                    var latlng = L.latLng(parseFloat(resposta[0]),
+                                        parseFloat(resposta[1]));
+                                    marker.setLatLng(latlng);
+                                },
+                                error: function(xhr, status, error) {
+                                    // Manipule os erros de solicitação aqui
+                                    console.error(error);
+                                }
+                            });
                             //var latlng = e.latlng;
-                            var latlng = L.latLng(<?php echo $document['latitude'] . ' , ' . $document['longitude'] ?>);
 
-                            marker.setLatLng(latlng);
-                            i += 0.00005;
+                            //i += 0.00005;
                             await new Promise(r => setTimeout(r, 1000));
                         } while (true);
                     }
