@@ -18,19 +18,19 @@
         <div class="card rounded-5 shadow-lg">
           <div class="card-header text-center">
             <a href="/" class="mb-2 mb-lg-0 my-5">
-                <img src="logo2.png" alt="logo" height="60px">
+                <img src="img\logo2.png" alt="logo" height="60px">
               </a>
             <h4>Acessar minha conta</h4>
           </div>
           <div class="card-body">
-            <form action="" method="POST">
+            <form action="usuario-login.php" method="POST">
               <div class="">
                 <label for="email" class="form-label">E-mail:</label>
-                <input type="email" class="form-control form-control-lg" id="email" required>
+                <input type="email" class="form-control form-control-lg" id="email" name="email" required>
               </div>
               <div class="">
                 <label for="senha" class="form-label">Senha:</label>
-                <input type="password" class="form-control form-control-lg" id="senha" required>
+                <input type="password" class="form-control form-control-lg" id="senha" name="senha" required>
               </div>
               <div class="col mt-2 text-center">
                 <button type="submit" class="btn btn-lg btn-primary"><i class="bi bi-box-arrow-in-right"></i> Entrar</button>
