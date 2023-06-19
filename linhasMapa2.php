@@ -5,8 +5,6 @@ $collection = $mongoClient->linhasItapira->onibusLocalizacao;
 
 $linhaId = $_GET['id'];
 
-echo intval($linhaId);
-
 $whereCondition = [
     'linhaId' => intval($linhaId)
 ];
@@ -65,7 +63,7 @@ $listParada = $parada->listar($linhaId);
             var longitude = -46.8230301;*/
             /* var locations = [
                 {
-                    name: 'Busão',
+                    name: 'Ônibus',
                     latitude: -22.4386529,
                     longitude: -46.822313
                 }, {
@@ -85,7 +83,7 @@ $listParada = $parada->listar($linhaId);
                 }
             ]; */
             var locations = [{
-                    name: 'Busão',
+                    name: 'Ônibus',
                     latitude: -22.4386529,
                     longitude: -46.822313
                 },
@@ -109,11 +107,11 @@ $listParada = $parada->listar($linhaId);
 
             // Set the map's center and zoom level based on the first location
             var firstLocation = locations[0];
-            map.setView(new L.LatLng(firstLocation.latitude, firstLocation.longitude), 16);
+            map.setView(new L.LatLng(firstLocation.latitude, firstLocation.longitude), 15);
             map.addLayer(osmLayer);
             //map.removeLayer(map.markerLayer);
 
-            var mapTitle = L.control({
+            /* var mapTitle = L.control({
                 position: 'topright'
             });
             mapTitle.onAdd = function(map) {
@@ -121,7 +119,7 @@ $listParada = $parada->listar($linhaId);
                 div.innerHTML - 'Rodoviaria - Cubatao';
                 return div;
             }
-            mapTitle.addTo(map);
+            mapTitle.addTo(map); */
 
             // Add markers for each location
             var markers = [];
@@ -129,7 +127,7 @@ $listParada = $parada->listar($linhaId);
                 var marker = L.marker([location.latitude, location.longitude]).addTo(map);
                 marker.bindPopup(location.name);
 
-                if (location.name == 'Busão') {
+                if (location.name == 'Ônibus') {
                     var myIcon = L.icon({
                         iconUrl: 'img/icons8-ônibus-50-2.png',
                         iconSize: [30, 30]
