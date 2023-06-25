@@ -1,3 +1,3 @@
-java -jar SimuladorOnibus.jar
+java -jar SimuladorOnibus_v2.jar
 
 pause
