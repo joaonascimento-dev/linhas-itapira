@@ -1,4 +1,6 @@
 <?php
+require_once "usuario-verifica.php";
+
 require_once 'C:\\xampp\\php\\vendor\\autoload.php';
 $mongoClient = new MongoDB\Client("mongodb://localhost:27017");
 $collection = $mongoClient->linhasItapira->onibusLocalizacao;
@@ -51,7 +53,11 @@ $listParada = $parada->listar($linhaId);
 
 <body id="corpo">
     <?php $ativo = "linhas";
-    include("fragment/navbar.php"); ?>
+    if (!isset($_SESSION['usuario_logado'])) {
+        include("fragment/navbar.php");
+    } else {
+        include("fragment/navbar2.php");
+    } ?>
 
     <div id="map"></div>
 
