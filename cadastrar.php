@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <title>Página de Login</title>
+  <title>Página de Cadastro</title>
   <?php include("fragment/head.html"); ?>
   <script>
     // Máscara para CPF
@@ -13,9 +14,10 @@
     }
   </script>
 </head>
+
 <body class="fundo-mapa">
-  
-<?php $ativo = "home";
+
+  <?php $ativo = "home";
   include("fragment/navbar.php"); ?>
 
 
@@ -24,9 +26,9 @@
       <div class="col-md-6">
         <div class="card rounded-5 shadow-lg">
           <div class="card-header text-center">
-            <a href="/" class="mb-2 mb-lg-0 my-5">
-                <img src="img\logo2.png" alt="logo" height="60px">
-              </a>
+            <a href="#" class="mb-2 mb-lg-0 my-5">
+              <img src="img\logo2.png" alt="logo" height="60px">
+            </a>
             <h4>Criar minha conta</h4>
           </div>
           <div class="card-body">
@@ -52,10 +54,18 @@
                 <input type="password" class="form-control form-control-lg" id="senhaConfirmar" name="senhaConfirmar" required>
               </div>
               <div class="col mt-2 text-center">
-                <button type="submit" class="btn btn-lg btn-primary"><i class="bi bi-person-plus-fill"></i>Criar Conta</button>
+                <button type="submit" class="btn btn-lg btn-primary"><i class="bi bi-person-plus-fill"></i> Criar Conta</button>
               </div>
-              
+
             </form>
           </div>
+
           <div class="card-footer">
-            <p class="text-center mt
+            <p class="text-center mt-2">Já possui conta? <a href="login.php" class="btn btn-outline-primary ms-2"><i class="bi bi-box-arrow-in-right"></i> Entrar</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

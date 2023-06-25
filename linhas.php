@@ -1,5 +1,6 @@
 <?php
 require_once "model/Linha.php";
+require_once "usuario-verifica.php";
 $linha = new Linha();
 $lista = $linha->listar();
 ?>
@@ -12,8 +13,15 @@ $lista = $linha->listar();
 </head>
 
 <body>
-    <?php $ativo = "linhas";
-    include("fragment/navbar.php"); ?>
+    <?php 
+    $ativo = "linhas";
+    if(!isset($_SESSION['usuario_logado'])) {
+        include("fragment/navbar.php");
+    }
+    else{
+        include("fragment/navbar2.php");
+    }
+    ?>
 
     <div class="container mt-4 px-md-5">
         <h1 class="text-center mb-3 fw-semibold">Linhas de Ônibus</h1>

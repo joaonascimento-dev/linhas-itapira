@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   include_once "conexao.php";
   $resultado = $conexao->query($sql);
   $linha = $resultado->fetch();
-  $usuario_logado = $linha['email'];
+  $usuario_logado = $linha['nome'];
 
   if ($usuario_logado == null) {
     // Usuário ou senha inválida
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   } else {
     session_start();
     $_SESSION['usuario_logado'] = $usuario_logado;
-    header('Location: linhas.php');
+    header('Location: index.php');
     exit();
   }
 } else {
