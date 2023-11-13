@@ -45,7 +45,7 @@
             <a href="horarios.php" class="btn btn-lg btn-outline-dark"><i class="bi bi-clock"></i> Horários</a>
           </div>
           <div class="col d-grid">
-          <a href="horarios.php" class="btn btn-lg btn-outline-dark"><i class="bi bi-sign-turn-right"></i> Linhas</a>
+          <a href="linhas.php" class="btn btn-lg btn-outline-dark"><i class="bi bi-sign-turn-right"></i> Linhas</a>
           </div>
         </div>
       </div>
