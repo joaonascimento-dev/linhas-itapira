@@ -1,4 +1,3 @@
-<?php require_once "usuario-verifica.php"; ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -13,11 +12,7 @@
   <?php
   $ativo = "home";
 
-  if (!isset($_SESSION['usuario_logado'])) {
-    include("fragment/navbar.php");
-  } else {
-    include("fragment/navbar2.php");
-  }
+  include("fragment/navbar.php");
 
   ?>
 
@@ -33,9 +28,6 @@
 
         </div>
       </div>
-
-
-
     </div>
 
     <div class="row justify-content-center mt-3">
@@ -50,6 +42,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </body>
 

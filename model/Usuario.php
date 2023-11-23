@@ -12,7 +12,7 @@ class Usuario
     public function __construct($id = false)
     {
         // Verifica se a variável $id foi definida
-        if ($id){
+        if ($id) {
             // Atribui o valor da $id à propriedade $id do objeto
             $this->id = $id;
 
@@ -79,16 +79,30 @@ class Usuario
     {
         // Query SQL para atualizar um usuário no banco de dados pelo id
         $sql = "UPDATE usuario SET
-                nome = '$this->nome', cpf = '$this->cpf', email = '$this->email', senha = '$this->senha', senhaConfirmar = '$this->senha'
-            WHERE id = $this->id ";
+                nome = '$this->nome', cpf = '$this->cpf', email = '$this->email', senha = '$this->senha', senhaConfirmar = '$this->senha' WHERE id = '$this->id'";
 
         include_once "conexao.php";
         $conexao->exec($sql);
     }
 
     public function verificarSenhasIguais()
-{
-    return $this->senha === $this->senhaConfirmar;
-}
+    {
+        return $this->senha === $this->senhaConfirmar;
+    }
+
+    public function excluir()
+    {
+        // Define a string de consulta SQL para deletar um registro
+        // da tabela "linha" com base no seu ID
+        $sql = "DELETE FROM usuario WHERE id=" . $this->id;
+
+        // Cria uma nova conexão PDO com o banco de dados localizado
+        // no servidor "127.0.0.1" e autentica com o usuário "root" (sem senha)
+        include_once "./conexao.php";
+
+        // Executa a instrução SQL de exclusão utilizando o método
+        // "exec" do objeto de conexão PDO criado acima
+        $conexao->exec($sql);
+    }
 
 }

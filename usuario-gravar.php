@@ -21,7 +21,7 @@ if (!$usuario->verificarSenhasIguais()) {
 // Chama o método inserir() no objeto Usuario para inserir
 // os dados do novo usuário no banco de dados
 $usuario->inserir();
-echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href = 'index.php';</script>";
+echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href = 'usuarioAdm.php';</script>";
 
 ?>
 

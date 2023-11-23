@@ -33,11 +33,7 @@
               <div class="col mt-2 text-center">
                 <button type="submit" class="btn btn-lg btn-primary"><i class="bi bi-box-arrow-in-right"></i> Entrar</button>
               </div>
-              
             </form>
-          </div>
-          <div class="card-footer">
-            <p class="text-center mt-2">Não possui conta? <a href="cadastrar.php" class="btn btn-outline-primary ms-2"><i class="bi bi-person-plus-fill"></i> Cadastrar</a></p>
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   } else {
     session_start();
     $_SESSION['usuario_logado'] = $usuario_logado;
-    header('Location: index.php');
+    header('Location: admin.php');
     exit();
   }
 } else {

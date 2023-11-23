@@ -1,3 +1,7 @@
+<?php
+require_once "usuario-verifica.php";
+?>
+
 <header class="px-3 bg-white">
     <div class="container pb-3 pb-md-0">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -11,6 +15,11 @@
                 <li><a href="linhas.php" class="nav-link px-2 <?php echo $ativo == 'linhas' ? "text-primary" : "text-dark" ?> fs-5"><i class="bi bi-sign-turn-right"></i> Linhas</a>
                 </li>
             </ul>
+
+            <div class="text-end">
+                <a href="#" class="btn btn-lg btn-dark me-2"><i class="bi bi-person-circle"></i> <?php echo $_SESSION['usuario_logado']; ?></a>
+                <a href="usuario-logout.php" class="btn btn-lg btn-outline-dark"><i class="bi bi bi-arrow-right"></i> Sair</a>
+            </div>
         </div>
     </div>
 </header>
