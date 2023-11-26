@@ -1,4 +1,12 @@
-<?php require_once "usuario-verifica.php";
+<?php
+session_start();
+
+// Verifica se o usuário está autenticado
+if (!isset($_SESSION['usuario_logado'])) {
+    // O usuário não está autenticado, redireciona para a página de login
+    header('Location: login.php');
+    exit();
+}
 require "model/Horario.php";
 
 //$linha = new Linha();
@@ -7,7 +15,7 @@ $horario = new Horario();
 // Check if the 'id' parameter is set in the URL
 if (isset($_GET['id'])) {
     $linhaId = $_GET['id'];
-
+    $nomeLinha = $horario->getNomeLinhaPorId($linhaId);
 } else {
     // Redirect or handle the case where the 'id' parameter is not set
     exit;
@@ -41,6 +49,7 @@ if (isset($_GET['id'])) {
                             <img src="img\logo2.png" alt="logo" height="60px">
                         </a>
                         <h4>Criar Horário para linha</h4>
+                        <h4><?= $nomeLinha ?></h4>
                     </div>
                     <div class="card-body">
                         <form action="horario-gravar.php" method="POST">

@@ -23,12 +23,8 @@ $lista = $horario->listar();
 <body>
     <?php
     $ativo = "horarios";
-    if(!isset($_SESSION['usuario_logado'])) {
-        include("fragment/navbar.php");
-    }
-    else{
-        include("fragment/navbar2.php");
-    }
+    include("fragment/navbar.php");
+    
     ?>
 
     <div class="container mt-4 px-md-5">

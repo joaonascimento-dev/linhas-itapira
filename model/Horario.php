@@ -19,6 +19,7 @@ class Horario
             $this->carregar();
         }
     }
+    
 
     public function inserir()
     {
@@ -54,43 +55,42 @@ class Horario
 
 
     public function carregar()
-{
-    // Query SQL para buscar uma linha no banco de dados pelo id
-    $sql = "SELECT * FROM horarios WHERE id = :id";
-    include_once "./conexao.php";
+    {
+        // Query SQL para buscar uma linha no banco de dados pelo id
+        $sql = "SELECT * FROM horarios WHERE id = :id";
+        include_once "./conexao.php";
 
-    try {
-        // Preparação da query usando prepared statement
-        $consulta = $conexao->prepare($sql);
-        // Associação do parâmetro :id com o valor de $this->id
-        $consulta->bindParam(':id', $this->id, PDO::PARAM_INT);
-        // Execução da query
-        $consulta->execute();
+        try {
+            // Preparação da query usando prepared statement
+            $consulta = $conexao->prepare($sql);
+            // Associação do parâmetro :id com o valor de $this->id
+            $consulta->bindParam(':id', $this->id, PDO::PARAM_INT);
+            // Execução da query
+            $consulta->execute();
 
-        // Recuperação da primeira linha do resultado como um array associativo
-        $linha = $consulta->fetch();
+            // Recuperação da primeira linha do resultado como um array associativo
+            $linha = $consulta->fetch();
 
-        // Atribuição dos valores dos campos recuperados do banco
-        $this->inicio = $linha['inicio'];
-        $this->fim = $linha['fim'];
-        $this->funcionamento = $linha['funcionamento'];
-        $this->linhaId = $linha['linha_id'];
-
-    } catch (PDOException $e) {
-        // Tratamento de exceção, se necessário
-        echo "Erro: " . $e->getMessage();
+            // Atribuição dos valores dos campos recuperados do banco
+            $this->inicio = $linha['inicio'];
+            $this->fim = $linha['fim'];
+            $this->funcionamento = $linha['funcionamento'];
+            $this->linhaId = $linha['linha_id'];
+        } catch (PDOException $e) {
+            // Tratamento de exceção, se necessário
+            echo "Erro: " . $e->getMessage();
+        }
     }
-}
 
     public function atualizar()
     {
         // Query SQL para atualizar um usuário no banco de dados pelo id
         $sql = "UPDATE horarios SET
-                inicio = '$this->inicio', fim = '$this->fim', funcionamento = '$this->funcionamento', linhaId = '$this->linhaId'
+                inicio = '$this->inicio', fim = '$this->fim', funcionamento = '$this->funcionamento'
             WHERE id = $this->id ";
 
         include_once "conexao.php";
-     
+
         $conexao->exec($sql);
     }
 
@@ -108,4 +108,48 @@ class Horario
         // "exec" do objeto de conexão PDO criado acima
         $conexao->exec($sql);
     }
+
+    public function getNomeLinhaPorId($linhaId)
+    {
+        // Query SQL para buscar o nome da linha no banco de dados pelo id
+        $sql = "SELECT nome FROM linha WHERE id = :linhaId";
+        include_once "./conexao.php";
+
+        try {
+            // Preparação da query usando prepared statement
+            $consulta = $conexao->prepare($sql);
+            // Associação do parâmetz'ro :linhaId com o valor de $linhaId
+            $consulta->bindParam(':linhaId', $linhaId, PDO::PARAM_INT);
+            // Execução da query
+            $consulta->execute();
+
+            // Recuperação da primeira linha do resultado como um array associativo
+            $linha = $consulta->fetch();
+
+            // Retorna o nome da linha
+            return $linha['nome'];
+        } catch (PDOException $e) {
+            // Tratamento de exceção, se necessário
+            echo "Erro: " . $e->getMessage();
+        }
+    }
+
+    public function listarLinhas()
+{
+    // Define a string SQL para selecionar todos os registros da tabela "linha"
+    $sql = "SELECT id, nome FROM linha";
+
+    // Cria uma nova conexão PDO com o banco de dados
+    include_once "./conexao.php";
+
+    // Executa a string SQL na conexão retornando um objeto de resultado
+    $resultado = $conexao->query($sql);
+
+    // Extrai todos os registros do objeto e os armazena em um array
+    $linhas = $resultado->fetchAll();
+
+    // Retorna o array contendo todos os registros da tabela "linha"
+    return $linhas;
+}
+
 }

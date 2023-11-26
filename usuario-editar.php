@@ -1,7 +1,14 @@
 <?php
+session_start();
+
+// Verifica se o usuário está autenticado
+if (!isset($_SESSION['usuario_logado'])) {
+    // O usuário não está autenticado, redireciona para a página de login
+    header('Location: login.php');
+    exit();
+}
 //require_once "model/Linha.php";
 require_once "model/Usuario.php";
-require_once "usuario-verifica.php";
 
 // Check if the 'id' parameter is set in the URL
 if (isset($_GET['id'])) {

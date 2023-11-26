@@ -1,4 +1,13 @@
-<?php require_once "usuario-verifica.php";
+<?php
+session_start();
+
+// Verifica se o usuário está autenticado
+if (!isset($_SESSION['usuario_logado'])) {
+    // O usuário não está autenticado, redireciona para a página de login
+    header('Location: login.php');
+    exit();
+}
+
 require "model/Horario.php";
 
 if (isset($_GET['id'])) {
@@ -6,6 +15,7 @@ if (isset($_GET['id'])) {
 
     // Create an instance of the Usuario class with the retrieved ID
     $horario = new Horario($id);
+    
 
     // Check if the user with the given ID exists
     if (!$horario->id) {
@@ -48,10 +58,10 @@ date_default_timezone_set('America/Sao_Paulo');
                         <a href="#" class="mb-2 mb-lg-0 my-5">
                             <img src="img\logo2.png" alt="logo" height="60px">
                         </a>
-                        <h4>Criar Horário para linha</h4>
+                        <h4>Editar Horário</h4>
                     </div>
                     <div class="card-body">
-                        <form action="linha-gravar.php" method="POST">
+                        <form action="horario-atualizar.php" method="POST">
                             <div class="">
                                 <label for="inicio" class="form-label">Inicio:</label>
                                 <input type="time" class="form-control form-control-lg" id="inicio" name="inicio" value="<?php echo date('H:i', strtotime($horario->inicio)); ?>" required>
@@ -64,8 +74,9 @@ date_default_timezone_set('America/Sao_Paulo');
                                 <label for="funcionamento" class="form-label">Funcionamento:</label>
                                 <input type="text" class="form-control form-control-lg" id="funcionamento" name="funcionamento" value="<?php echo $horario->funcionamento; ?>" required>
                             </div>
+                            <input type="hidden" name="id" value="<?= $horario->id ?>">
                             <div class="col mt-2 text-center">
-                                <button type="submit" class="btn btn-lg btn-primary"><i class="bi bi-person-plus-fill"></i> Editar Horário</button>
+                                <button type="submit" class="btn btn-lg btn-primary"> Editar Horário</button>
                             </div>
                         </form>
                     </div>

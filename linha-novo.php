@@ -1,4 +1,13 @@
-<?php require_once "usuario-verifica.php";
+<?php
+
+session_start();
+
+// Verifica se o usuário está autenticado
+if (!isset($_SESSION['usuario_logado'])) {
+    // O usuário não está autenticado, redireciona para a página de login
+    header('Location: login.php');
+    exit();
+}
 require "model/Linha.php";
 
 //$linha = new Linha();

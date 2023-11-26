@@ -67,42 +67,42 @@ class Linha
     }
 
     public function carregar()
-{
-    // Verifica se o ID está vazio ou nulo
-    if (empty($this->id)) {
-        // Trate o caso em que o ID é inválido
-        // Por exemplo, redirecione para uma página de erro ou exiba uma mensagem
-        echo "ID inválido";
-        exit();
-    }
-
-    // Query SQL para buscar um usuário no banco de dados pelo id
-    $sql = "SELECT * FROM linha WHERE id=" . $this->id;
-    include_once "conexao.php";
-
-    // Utilização de prepared statement para a consulta SQL
-    $stmt = $conexao->prepare($sql);
-    
-    // Verifica se a execução da query foi bem-sucedida
-    if ($stmt->execute()) {
-        // Recuperação do primeiro usuário do resultado como um array associativo
-        $linha = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Verifica se a linha foi encontrada
-        if ($linha) {
-            // Atribuição dos valores dos campos recuperados do banco
-            $this->nome = $linha['nome'];
-        } else {
-            // Trate o caso em que o ID não corresponde a nenhum registro
-            echo "Registro não encontrado";
+    {
+        // Verifica se o ID está vazio ou nulo
+        if (empty($this->id)) {
+            // Trate o caso em que o ID é inválido
+            // Por exemplo, redirecione para uma página de erro ou exiba uma mensagem
+            echo "ID inválido";
             exit();
         }
-    } else {
-        // Trate o caso em que ocorreu um erro na execução da query
-        echo "Erro na execução da query";
-        exit();
+
+        // Query SQL para buscar um usuário no banco de dados pelo id
+        $sql = "SELECT * FROM linha WHERE id=" . $this->id;
+        include_once "conexao.php";
+
+        // Utilização de prepared statement para a consulta SQL
+        $stmt = $conexao->prepare($sql);
+
+        // Verifica se a execução da query foi bem-sucedida
+        if ($stmt->execute()) {
+            // Recuperação do primeiro usuário do resultado como um array associativo
+            $linha = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Verifica se a linha foi encontrada
+            if ($linha) {
+                // Atribuição dos valores dos campos recuperados do banco
+                $this->nome = $linha['nome'];
+            } else {
+                // Trate o caso em que o ID não corresponde a nenhum registro
+                echo "Registro não encontrado";
+                exit();
+            }
+        } else {
+            // Trate o caso em que ocorreu um erro na execução da query
+            echo "Erro na execução da query";
+            exit();
+        }
     }
-}
 
 
     public function atualizar()

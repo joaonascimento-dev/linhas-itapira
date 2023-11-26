@@ -10,9 +10,7 @@ require_once "usuario-verifica.php";
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 ms-0 ms-md-5">
-                <li><a href="index.php" class="nav-link px-2 <?php echo $ativo == 'home' ? "text-primary" : "text-dark" ?> fs-5"><i class="bi bi-house"></i> Home</a></li>
-                <li><a href="horarios.php" class="nav-link px-2 <?php echo $ativo == 'horarios' ? "text-primary" : "text-dark" ?> fs-5"><i class="bi bi-clock"></i> Horários</a></li>
-                <li><a href="linhas.php" class="nav-link px-2 <?php echo $ativo == 'linhas' ? "text-primary" : "text-dark" ?> fs-5"><i class="bi bi-sign-turn-right"></i> Linhas</a>
+                <li><a href="admin.php" class="nav-link px-2 <?php echo $ativo == 'home' ? "text-primary" : "text-dark" ?> fs-5"><i class="bi bi-house"></i> Home</a></li>
                 </li>
             </ul>
 

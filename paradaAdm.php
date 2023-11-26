@@ -9,13 +9,13 @@ if (!isset($_SESSION['usuario_logado'])) {
 }
 
 //require_once "model/Linha.php";
-require_once "model/Usuario.php";
+require_once "model/Parada.php";
 
 //$linha = new Linha();
-$usuario = new Usuario();
+$parada = new Parada();
 
 //$lista = $linha->listar();
-$lista = $usuario->listar();
+$lista = $parada->listar();
 
 ?>
 <!DOCTYPE html>
@@ -38,15 +38,15 @@ $lista = $usuario->listar();
     ?>
 
     <div class="container mt-4 px-md-5">
-        <h1 class="text-center mb-3 fw-semibold">Usuários Administradores</h1>
+        <h1 class="text-center mb-3 fw-semibold">Paradas de Ônibus</h1>
         <div class="container-fluid h-100 d-flex align-items-center justify-content-center">
             <table class="table table-bordered table-bordered">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Email</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -55,10 +55,10 @@ $lista = $usuario->listar();
                         <tr class="<?php echo $index % 2 == 0 ? 'bg-secondary-subtle' : '' ?>">
                             <td><?php echo $linha['id'] ?></td>
                             <td><?php echo $linha['nome'] ?></td>
-                            <td><?php echo $linha['cpf'] ?></td>
-                            <td><?php echo $linha['email'] ?></td>
-                            <td class="text-center"><a class="btn btn-warning" href="usuario-editar.php?id=<?= $linha['id'] ?>">Editar Usuário</i></a>
-                                <a class="btn btn-warning" href="usuario-excluir.php?id=<?= $linha['id'] ?>">Excluir Usuário</i></a>
+                            <td><?php echo $linha['latitude'] ?></td>
+                            <td><?php echo $linha['longitude'] ?></td>
+                            <td class="text-center"><a class="btn btn-warning" href="parada-editar.php?id=<?= $linha['id'] ?>">Editar Parada</i></a>
+                                <a class="btn btn-warning" href="parada-excluir.php?id=<?= $linha['id'] ?>">Excluir Parada</i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -67,7 +67,7 @@ $lista = $usuario->listar();
 
         </div>
         <div class="col mt-2 text-end">
-            <a href="usuario-novo.php" class="btn btn-lg btn-primary"> Novo Usuário</a>
+            <a href="parada-novo.php" class="btn btn-lg btn-primary"> Nova Parada</a>
         </div>
     </div>
 </body>

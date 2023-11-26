@@ -6,6 +6,7 @@ class Parada
     public $latitude;
     public $longitude;
     public $linhaId;
+    private $conexao;
 
     // Define um metódo construtor na classe parâmetro opcional
     public function __construct($id = false)
@@ -75,20 +76,43 @@ class Parada
 
     public function carregar()
     {
-        // Query SQL para buscar uma parada no banco de dados pelo id
+        // Verifica se o ID está vazio ou nulo
+        if (empty($this->id)) {
+            // Trate o caso em que o ID é inválido
+            // Por exemplo, redirecione para uma página de erro ou exiba uma mensagem
+            echo "ID inválido";
+            exit();
+        }
+
+        // Query SQL para buscar um usuário no banco de dados pelo id
         $sql = "SELECT * FROM parada WHERE id=" . $this->id;
-        include_once "./conexao.php";
+        include_once "conexao.php";
 
-        // Execução da query e armazenamento do resultado em uma variável
-        $resultado = $conexao->query($sql);
-        // Recuperação da primeira parada do resultado como um array associativo
-        $parada = $resultado->fetch();
+        // Utilização de prepared statement para a consulta SQL
+        $stmt = $conexao->prepare($sql);
 
-        //Atribuição dos valores dos campos recuperados do banco
-        $this->nome = $parada['nome'];
-        $this->latitude = $parada['latitude'];
-        $this->longitude = $parada['longitude'];
-        $this->linhaId = $parada['linhaId'];
+        // Verifica se a execução da query foi bem-sucedida
+        if ($stmt->execute()) {
+            // Recuperação do primeiro usuário do resultado como um array associativo
+            $linha = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Verifica se a linha foi encontrada
+            if ($linha) {
+                // Atribuição dos valores dos campos recuperados do banco
+                $this->nome = $linha['nome'];
+                $this->latitude = $linha['latitude'];
+                $this->longitude = $linha['longitude'];
+                $this->linhaId = $linha['linhaId'];
+            } else {
+                // Trate o caso em que o ID não corresponde a nenhum registro
+                echo "Registro não encontrado";
+                exit();
+            }
+        } else {
+            // Trate o caso em que ocorreu um erro na execução da query
+            echo "Erro na execução da query";
+            exit();
+        }
     }
 
     public function atualizar()
@@ -101,4 +125,7 @@ class Parada
         include_once "./conexao.php";
         $conexao->exec($sql);
     }
+
 }
+
+

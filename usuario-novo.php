@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+// Verifica se o usuário está autenticado
+if (!isset($_SESSION['usuario_logado'])) {
+  // O usuário não está autenticado, redireciona para a página de login
+  header('Location: login.php');
+  exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -17,8 +29,15 @@
 
 <body class="fundo-mapa">
 
-  <?php $ativo = "home";
-  include("fragment/navbar.php"); ?>
+  <?php 
+  if (!isset($_SESSION['usuario_logado'])) {
+    include("fragment/navbar2.php");
+  } else {
+    include("fragment/navbar3.php");
+  }
+  ?>?>
+
+
 
 
   <div class="container mt-5">
@@ -64,4 +83,5 @@
     </div>
   </div>
 </body>
+
 </html>
